@@ -6,22 +6,23 @@ require('dotenv').config()
 const db = require('../BACKEND/Database/db');
 const authRoutes = require('../BACKEND/Routes/auth');
 const categoryRoutes  = require('../BACKEND/Routes/category');
+const productroutes = require('../BACKEND/Routes/product')
 const cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser')
 
 app.use(cookieParser())
 app.use(cors());
 app.use(morgan('dev'));
-app.use(express.json());
-
-
+//app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }))
+// parse application/json
+app.use(bodyParser.json())
 
 
 app.use('/api/auth',authRoutes);
-//app.use('/api/category',categoryRoutes);
-app.post('/api/category/',(req,res)=>{
-    console.log('inside category controller')
-    console.log(req)
-})
+app.use('/api/category',categoryRoutes);
+app.use('/api/product',productroutes)
+
 
 const port = process.env.port||5000
 db.databaseConnect((err,res)=>{

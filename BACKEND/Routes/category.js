@@ -1,13 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const authenticator = require('../Middlewares/authenticator')
+
 const categoryController = require('../Controllers/categoryController')
+const authenticatorJWT = require('../Middlewares/authenticator')
 
-router.post('/',(req,res)=>{
-    console.log('inside category routes ')
-    console.log(req.body)
-    console.log(req.cookies)
-})
-
+router.post('/',authenticatorJWT.authenticateJWT,categoryController.createCategory)
+router.get('/',authenticatorJWT.authenticateJWT,categoryController.getCategories)
 
 module.exports = router;

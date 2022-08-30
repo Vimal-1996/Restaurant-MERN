@@ -5,6 +5,7 @@ const { jwtExpire, jwtSecret } = require('../config/keys')
 
 exports.signinController = async (req, res, next) => {
     const { email, password } = req.body
+    
     await users.findOne({ email }, (err, databaseResponse) => {
         if (err) {
             res.status(404).json({

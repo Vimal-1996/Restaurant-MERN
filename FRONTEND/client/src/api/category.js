@@ -2,18 +2,37 @@ import axios from 'axios'
 import { resolve } from 'promise'
 
 const config = {
-    headers: {'Context-Type': 'application-json'}
+    headers: {
+        'Content-Type': 'application/json'
+    },
 }
 
-export const createCategory = async (formdata) => {  
-    console.log("inside create category") 
+const headers={
+    'Content-Type': 'application/json'
+}
+
+export const createCategory = async (formdata) => {   
     return await new Promise((resolve, reject) => {
-        axios.post('http://localhost:4000/api/category/', formdata, config)
+        axios.post('/api/category/', formdata,{
+            headers:headers
+        })
             .then((response) => {
                 resolve(response)
             })
             .catch((error) => {
                 reject(error)
             })
+    })
+}
+
+export const getCategories = async()=>{
+    return await new Promise((resolve,reject)=>{
+        axios.get('/api/category/')
+        .then((response)=>{
+            resolve(response)
+        })
+        .catch((err)=>{
+            reject(err)
+        })
     })
 }

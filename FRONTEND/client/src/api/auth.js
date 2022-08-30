@@ -5,12 +5,12 @@ import { setLocalStorage } from "../helpers/localStorage";
 
 const config = {
     headers: {
-        'Context-Type': 'application-json'
+        'Content-Type': 'application/json'
     },
 }
 export const signup = async (data) => {
     return await new Promise((resolve, reject) => {
-        axios.post('http://localhost:4000/api/auth/signup', data, config)
+        axios.post('/api/auth/signup', data, config)
             .then((res) => {
                 resolve(res)
             })
@@ -22,7 +22,7 @@ export const signup = async (data) => {
 
 export const signin = async (data) => {
     return  await  new Promise((resolve,reject)=>{
-       axios.post('http://localhost:4000/api/auth/signin', data, config)
+       axios.post('/api/auth/signin', data, config)
         .then((res) => {
             resolve(res)
         })
